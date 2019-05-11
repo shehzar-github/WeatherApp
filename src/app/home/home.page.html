@@ -1,14 +1,36 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+     Weather App
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+    <ion-grid>
+      <ion-row>
+      <ion-col size="8" size-sm="8">
+        <ion-searchbar #input placeholder="Your City name" autocomplete="on"></ion-searchbar>
+      </ion-col>
+      <ion-col size="4" size-sm="4">
+        
+          <ion-button  (click)="getWeatherData(input.value)">Search</ion-button>
+        <!-- </ion-item> -->
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+    <ion-list  *ngIf="hasData">
+        <ion-item class="weather">
+          <ion-label>Temperature : {{weather.main.temp}}&deg;C</ion-label>
+        </ion-item>
+        <ion-item class="weather">
+          <ion-label>Description : {{weather.weather[0].description}}</ion-label>
+        </ion-item>
+        <ion-item class="weather">
+          <ion-label>Humidity : {{weather.main.humidity}}</ion-label>
+        </ion-item>
+      </ion-list>
+      <div *ngIf="hasError">{{error.error.message}}</div>
   </div>
 </ion-content>
